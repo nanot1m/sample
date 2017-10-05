@@ -7,13 +7,13 @@ using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using Vostok.Airlock;
 using Vostok.Clusterclient.Topology;
-using Vostok.ImageStore.Configuration;
-using Vostok.ImageStore.Controllers;
+using Vostok.ImageStore.Client;
 using Vostok.Instrumentation.AspNetCore;
 using Vostok.Logging;
 using Vostok.Logging.Serilog;
+using Vostok.ThumbnailGenerator.Configuration;
 
-namespace Vostok.ImageStore
+namespace Vostok.ThumbnailGenerator
 {
     public static class EntryPoint
     {
@@ -21,7 +21,7 @@ namespace Vostok.ImageStore
         {
             new WebHostBuilder()
                 .UseKestrel()
-                .UseUrls("http://+:33334")
+                .UseUrls("http://+:33335")
                 .ConfigureAppConfiguration((hostingContext, config) =>
                 {
                     config.AddJsonFile("appsettings.json", false, true);
@@ -73,12 +73,8 @@ namespace Vostok.ImageStore
                 {
                     services.AddMvc();
 
-                    services.AddSingleton<IImagesRepository>(new InMemoryImagesRepository());
-
-//                    var connection = hostingContext.Configuration.GetConnectionString("ImagesDatabase");
-//                    services.AddDbContext<ImagesContext>(options => options.UseSqlServer(connection));
-//
-//                    services.AddSingleton(typeof(IImagesRepository), typeof(ImagesRepository));
+                    var host = hostingContext.Configuration.GetSection("topology").GetValue<Uri>("imageStore");
+                    services.AddSingleton(provider => new ImageStoreClient(provider.GetService<ILog>(), host));
                 })
                 .Configure(app =>
                 {

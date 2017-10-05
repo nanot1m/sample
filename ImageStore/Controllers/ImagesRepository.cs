@@ -29,5 +29,11 @@ namespace Vostok.ImageStore.Controllers
         {
             return await context.Images.Where(x => x.Name.StartsWith(name)).Select(x => x.Name).ToArrayAsync().ConfigureAwait(false);
         }
+
+        public async Task DeleteAsync(string name)
+        {
+            context.Remove(new ImageEntity {Name = name});
+            await context.SaveChangesAsync().ConfigureAwait(false);
+        }
     }
 }

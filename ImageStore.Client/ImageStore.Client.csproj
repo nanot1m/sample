@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <RootNamespace>Vostok.ImageStore.Client</RootNamespace>
+    <AssemblyName>Vostok.ImageStore.Client</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Vostok.ClusterClient" Version="1.0.0-pre000076" />
+    <PackageReference Include="Vostok.ClusterClient.Transport.Http" Version="1.0.0-pre000076" />
+    <PackageReference Include="Vostok.Core" Version="1.0.0-pre000171" />
+  </ItemGroup>
+
+</Project>

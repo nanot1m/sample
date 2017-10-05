@@ -55,5 +55,10 @@ namespace Vostok.ImageStore.Controllers
 
             return result.OrderBy(x => x, StringComparer.InvariantCultureIgnoreCase).ToArray();
         }
+
+        public Task DeleteAsync(string name)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

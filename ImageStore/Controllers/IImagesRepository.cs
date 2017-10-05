@@ -9,5 +9,7 @@ namespace Vostok.ImageStore.Controllers
         Task UploadAsync(string name, byte[] content);
 
         Task<string[]> SearchByName(string name);
+
+        Task DeleteAsync(string name);
     }
 }

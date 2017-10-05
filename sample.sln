@@ -2,8 +2,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "bluewater", "bluewater\bluewater.csproj", "{5BB173B8-4520-492E-9C5E-EF4CC3404C1B}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageStore", "ImageStore\ImageStore.csproj", "{575A12E8-681E-477F-A6D4-079FAB2309AA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThumbnailGenerator", "ThumbnailGenerator\ThumbnailGenerator.csproj", "{BD7E06A3-2B43-4217-B36B-12EDB7A85869}"
@@ -16,10 +14,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5BB173B8-4520-492E-9C5E-EF4CC3404C1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5BB173B8-4520-492E-9C5E-EF4CC3404C1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5BB173B8-4520-492E-9C5E-EF4CC3404C1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5BB173B8-4520-492E-9C5E-EF4CC3404C1B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{575A12E8-681E-477F-A6D4-079FAB2309AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{575A12E8-681E-477F-A6D4-079FAB2309AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{575A12E8-681E-477F-A6D4-079FAB2309AA}.Release|Any CPU.ActiveCfg = Release|Any CPU

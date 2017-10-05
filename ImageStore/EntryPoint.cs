@@ -10,8 +10,6 @@ using Vostok.ImageStore.Configuration;
 using Vostok.ImageStore.Controllers;
 using Vostok.Instrumentation.AspNetCore;
 using Vostok.Logging;
-using Vostok.Logging.Airlock;
-using Vostok.Logging.Logs;
 using Vostok.Logging.Serilog;
 
 namespace Vostok.ImageStore
@@ -38,7 +36,7 @@ namespace Vostok.ImageStore
                     {
                         ApiKey = airlockApiKey,
                         ClusterProvider = new FixedClusterProvider(airlockHost)
-                    }, new ConsoleLog());
+                    });
         
                     services.AddSingleton<IAirlockClient>(airlock);
                 })
@@ -61,7 +59,7 @@ namespace Vostok.ImageStore
                         .Enrich.WithProperty("Service", ServiceOptions.Name)
                         .WriteTo.Airlock(serviceProvider.GetService<IAirlockClient>(), routingKey)
                         .WriteTo.Async(x => x.RollingFile(rollingFilePathFormat, outputTemplate: outputTemplate))
-                      //  .WriteTo.Console(outputTemplate: outputTemplate)
+                        .WriteTo.Console(outputTemplate: outputTemplate)
                         .CreateLogger();
 
                     var log = new SerilogLog(Log.Logger).WithFlowContext();

@@ -15,10 +15,10 @@
     <PackageReference Include="Serilog.Sinks.Async" Version="1.1.0" />
     <PackageReference Include="Serilog.Sinks.Console" version="3.0.1" />
     <PackageReference Include="Serilog.Sinks.RollingFile" Version="3.3.0" />
-    <PackageReference Include="Vostok.Airlock.Client" Version="1.0.0-pre000037" />
-    <PackageReference Include="Vostok.Core" Version="1.0.0-pre000171" />
-    <PackageReference Include="Vostok.Instrumentation.AspNetCore" Version="1.0.0-pre000055" />
-    <PackageReference Include="Vostok.Logging.Serilog" Version="1.0.0-pre000055" />
+    <PackageReference Include="Vostok.Airlock.Client" Version="1.0.0-pre000043" />
+    <PackageReference Include="Vostok.Core" Version="1.0.0-pre000172" />
+    <PackageReference Include="Vostok.Instrumentation.AspNetCore" Version="1.0.0-pre000056" />
+    <PackageReference Include="Vostok.Logging.Serilog" Version="1.0.0-pre000056" />
   </ItemGroup>
 
   <ItemGroup>

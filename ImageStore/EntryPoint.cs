@@ -68,11 +68,16 @@ namespace Vostok.ImageStore
 
                     logging.Services.AddSingleton(log);
                 })
-                .ConfigureServices(services =>
+                .ConfigureServices((hostingContext, services) =>
                 {
                     services.AddMvc();
 
                     services.AddSingleton<IImagesRepository>(new InMemoryImagesRepository());
+
+//                    var connection = hostingContext.Configuration.GetConnectionString("ImagesDatabase");
+//                    services.AddDbContext<ImagesContext>(options => options.UseSqlServer(connection));
+//
+//                    services.AddSingleton(typeof(IImagesRepository), typeof(ImagesRepository));
                 })
                 .Configure(app =>
                 {

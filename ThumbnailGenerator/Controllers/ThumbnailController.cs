@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Vostok.ImageStore.Client;
 
-namespace Vostok.ThumbnailGenerator.Controllers
+namespace Vostok.Sample.ThumbnailGenerator.Controllers
 {
     [Route("Thumbnail")]
     public class ThumbnailController : Controller

@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace Vostok.ImageStore.Controllers
+namespace Vostok.Sample.ImageStore.Controllers
 {
     public interface IImagesRepository
     {
@@ -10,6 +10,6 @@ namespace Vostok.ImageStore.Controllers
 
         Task<string[]> SearchByName(string name);
 
-        Task DeleteAsync(string name);
+        Task RemoveAsync(string name);
     }
 }

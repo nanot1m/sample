@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Vostok.ImageStore.Controllers
+namespace Vostok.Sample.ImageStore.Controllers
 {
     [Route("Image")]
     public class ImageController : Controller
@@ -25,7 +25,7 @@ namespace Vostok.ImageStore.Controllers
             await imagesRepository.UploadAsync(name, image).ConfigureAwait(false);
         }
 
-        [HttpGet]
+        [HttpGet("Search/{*name}")]
         public async Task<string[]> SearchAsync(string name)
         {
             return await imagesRepository.SearchByName(name).ConfigureAwait(false);
@@ -34,7 +34,7 @@ namespace Vostok.ImageStore.Controllers
         [HttpDelete("{*name}")]
         public async Task DeleteAsync(string name)
         {
-            await imagesRepository.DeleteAsync(name).ConfigureAwait(false);
+            await imagesRepository.RemoveAsync(name).ConfigureAwait(false);
         }
     }
 }

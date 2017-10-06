@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
-namespace Vostok.ImageStore.Controllers
+namespace Vostok.Sample.ImageStore.Controllers
 {
     public class ImagesRepository : IImagesRepository
     {
@@ -30,7 +30,7 @@ namespace Vostok.ImageStore.Controllers
             return await context.Images.Where(x => x.Name.StartsWith(name)).Select(x => x.Name).ToArrayAsync().ConfigureAwait(false);
         }
 
-        public async Task DeleteAsync(string name)
+        public async Task RemoveAsync(string name)
         {
             context.Remove(new ImageEntity {Name = name});
             await context.SaveChangesAsync().ConfigureAwait(false);

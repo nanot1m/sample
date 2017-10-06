@@ -2,12 +2,12 @@
 
   <PropertyGroup>
     <TargetFrameworks>netcoreapp2.0</TargetFrameworks>
-    <AssemblyName>Vostok.ThumbnailGenerator</AssemblyName>
-    <RootNamespace>Vostok.ThumbnailGenerator</RootNamespace>
-    <PackageId>Vostok.ThumbnailGenerator</PackageId>
-    <Authors>Vostok.ThumbnailGenerator</Authors>
-    <Company>Vostok.ThumbnailGenerator</Company>
-    <Product>Vostok.ThumbnailGenerator</Product>
+    <AssemblyName>Vostok.Sample.ThumbnailGenerator</AssemblyName>
+    <RootNamespace>Vostok.Sample.ThumbnailGenerator</RootNamespace>
+    <PackageId>Vostok.Sample.ThumbnailGenerator</PackageId>
+    <Authors>Vostok.Sample.ThumbnailGenerator</Authors>
+    <Company>Vostok.Sample.ThumbnailGenerator</Company>
+    <Product>Vostok.Sample.ThumbnailGenerator</Product>
   </PropertyGroup>
 
   <ItemGroup>

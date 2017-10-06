@@ -11,10 +11,9 @@ using Vostok.Instrumentation.AspNetCore;
 using Vostok.Logging;
 using Vostok.Logging.Serilog;
 using Vostok.Metrics;
-using Vostok.Sample.ImageStore.Controllers;
 using Vostok.Tracing;
 
-namespace Vostok.Sample.ImageStore
+namespace Vostok.Sample.ImageFilter
 {
     public static class EntryPoint
     {
@@ -22,7 +21,7 @@ namespace Vostok.Sample.ImageStore
         {
             new WebHostBuilder()
                 .UseKestrel()
-                .UseUrls("http://+:33334")
+                .UseUrls("http://+:33337")
                 .ConfigureAppConfiguration((hostingContext, config) =>
                 {
                     config.AddJsonFile("appsettings.json", false, true);
@@ -89,18 +88,12 @@ namespace Vostok.Sample.ImageStore
                 .ConfigureServices((hostingContext, services) =>
                 {
                     services.AddMvc();
-
-                    services.AddSingleton<IImagesRepository>(new InMemoryImagesRepository());
-//                    var connection = hostingContext.Configuration.GetConnectionString("ImagesDatabase");
-//                    services.AddDbContext<ImagesContext>(options => options.UseSqlServer(connection));
-//
-//                    services.AddSingleton(typeof(IImagesRepository), typeof(ImagesRepository));
                 })
                 .Configure(app =>
                 {
                     app.UseMiddleware<RequestExecutionTimeMiddleware>();
                     app.UseMiddleware<RequestExecutionDistributedContextMiddleware>();
-                    app.UseMiddleware<RequestExecutionTraceMiddleware>("ImageStore");
+                    app.UseMiddleware<RequestExecutionTraceMiddleware>("ImageFilter");
                     app.UseDeveloperExceptionPage();
                     app.UseMvc();
 

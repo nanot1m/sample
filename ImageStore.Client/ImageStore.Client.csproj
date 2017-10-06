@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>Vostok.ImageStore.Client</RootNamespace>
-    <AssemblyName>Vostok.ImageStore.Client</AssemblyName>
+    <RootNamespace>Vostok.Sample.ImageStore.Client</RootNamespace>
+    <AssemblyName>Vostok.Sample.ImageStore.Client</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,6 +1,6 @@
 using System;
 
-namespace Vostok.ImageStore.Controllers
+namespace Vostok.Sample.ImageStore.Controllers
 {
     public class ImageNotFoundException : Exception
     {

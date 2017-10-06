@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace Vostok.ImageStore.Controllers
+namespace Vostok.Sample.ImageStore.Controllers
 {
     public class InMemoryImagesRepository : IImagesRepository
     {
@@ -56,7 +56,7 @@ namespace Vostok.ImageStore.Controllers
             return result.OrderBy(x => x, StringComparer.InvariantCultureIgnoreCase).ToArray();
         }
 
-        public Task DeleteAsync(string name)
+        public Task RemoveAsync(string name)
         {
             throw new NotImplementedException();
         }

@@ -1,7 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
-namespace Vostok.ImageStore.Controllers
+namespace Vostok.Sample.ImageStore.Controllers
 {
     public class ImagesContext : DbContext
     {
@@ -11,20 +10,5 @@ namespace Vostok.ImageStore.Controllers
         }
 
         public DbSet<ImageEntity> Images { get; set; }
-//        public DbSet<ImageThumbEntity> ImageThumbs { get; set; }
     }
-
-    public class ImageEntity
-    {
-        [Key]
-        public string Name { get; set; }
-        public byte[] Content { get; set; }
-    }
-
-//    public class ImageThumbEntity
-//    {
-//        [Key]
-//        public string Name { get; set; }
-//        public byte[] Content { get; set; }
-//    }
 }

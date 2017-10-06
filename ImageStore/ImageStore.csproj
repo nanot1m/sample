@@ -2,8 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <AssemblyName>Vostok.ImageStore</AssemblyName>
-    <RootNamespace>Vostok.ImageStore</RootNamespace>
+    <AssemblyName>Vostok.Sample.ImageStore</AssemblyName>
+    <RootNamespace>Vostok.Sample.ImageStore</RootNamespace>
+    <PackageId>Vostok.Sample.ImageStore</PackageId>
+    <Authors>Vostok.Sample.ImageStore</Authors>
+    <Company>Vostok.Sample.ImageStore</Company>
+    <Product>Vostok.Sample.ImageStore</Product>
   </PropertyGroup>
 
   <ItemGroup>

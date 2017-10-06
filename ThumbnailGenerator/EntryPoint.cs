@@ -12,10 +12,9 @@ using Vostok.Instrumentation.AspNetCore;
 using Vostok.Logging;
 using Vostok.Logging.Serilog;
 using Vostok.Metrics;
-using Vostok.ThumbnailGenerator.Configuration;
 using Vostok.Tracing;
 
-namespace Vostok.ThumbnailGenerator
+namespace Vostok.Sample.ThumbnailGenerator
 {
     public static class EntryPoint
     {
@@ -98,7 +97,7 @@ namespace Vostok.ThumbnailGenerator
                 {
                     app.UseMiddleware<RequestExecutionTimeMiddleware>();
                     app.UseMiddleware<RequestExecutionDistributedContextMiddleware>();
-                    app.UseMiddleware<RequestExecutionTraceMiddleware>(ServiceOptions.Name);
+                    app.UseMiddleware<RequestExecutionTraceMiddleware>("ThumbnailGenerator");
                     app.UseDeveloperExceptionPage();
                     app.UseMvc();
 

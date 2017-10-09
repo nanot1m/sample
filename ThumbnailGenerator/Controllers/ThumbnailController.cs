@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Vostok.ImageStore.Client;
+using Vostok.Sample.ImageStore.Client;
 
 namespace Vostok.Sample.ThumbnailGenerator.Controllers
 {

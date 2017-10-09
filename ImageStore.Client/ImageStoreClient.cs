@@ -6,7 +6,7 @@ using Vostok.Clusterclient.Topology;
 using Vostok.Clusterclient.Transport.Http;
 using Vostok.Logging;
 
-namespace Vostok.ImageStore.Client
+namespace Vostok.Sample.ImageStore.Client
 {
     public class ImageStoreClient
     {

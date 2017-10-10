@@ -24,6 +24,8 @@ namespace Vostok.Sample.ImageFilter
                 })
                 .Configure(app =>
                 {
+                    app.UseVostok();
+                    app.UseDeveloperExceptionPage();
                     app.UseMvc();
                 })
                 .Build()

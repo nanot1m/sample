@@ -27,6 +27,8 @@ namespace Vostok.Sample.ThumbnailGenerator
                 })
                 .Configure(app =>
                 {
+                    app.UseVostok();
+                    app.UseDeveloperExceptionPage();
                     app.UseMvc();
                 })
                 .ConfigureServices((hostingContext, services) =>

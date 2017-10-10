@@ -13,7 +13,7 @@ namespace Vostok.Sample.ImageStore
         {
             new WebHostBuilder()
                 .UseKestrel()
-                .UseUrls("http://+:33334/")
+                .UseUrls("http://+:33334")
                 .ConfigureAppConfiguration((hostingContext, config) =>
                 {
                     config.AddJsonFile("appsettings.json", false, true);
@@ -25,6 +25,8 @@ namespace Vostok.Sample.ImageStore
                 })
                 .Configure(app =>
                 {
+                    app.UseVostok();
+                    app.UseDeveloperExceptionPage();
                     app.UseMvc();
                 })
                 .ConfigureServices((hostingContext, services) =>

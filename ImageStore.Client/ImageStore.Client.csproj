@@ -9,7 +9,7 @@
   <ItemGroup>
     <PackageReference Include="Vostok.ClusterClient" Version="1.0.0-pre000079" />
     <PackageReference Include="Vostok.ClusterClient.Transport.Http" Version="1.0.0-pre000079" />
-    <PackageReference Include="Vostok.Core" Version="1.0.0-pre000175" />
+    <PackageReference Include="Vostok.Core" Version="1.0.0-pre000176" />
   </ItemGroup>
 
 </Project>

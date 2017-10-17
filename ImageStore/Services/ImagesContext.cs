@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace Vostok.Sample.ImageStore.Controllers
+namespace Vostok.Sample.ImageStore.Services
 {
     public class ImagesContext : DbContext
     {

@@ -1,5 +1,8 @@
+using System.IO;
+using System.Net.Mime;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Vostok.Sample.ImageStore.Services;
 
 namespace Vostok.Sample.ImageStore.Controllers
 {
@@ -13,28 +16,31 @@ namespace Vostok.Sample.ImageStore.Controllers
             this.imagesRepository = imagesRepository;
         }
 
-        [HttpGet("{*name}")]
-        public async Task<byte[]> DownloadAsync(string name)
+        [HttpGet("{*id}")]
+        public async Task<ActionResult> DownloadAsync(string id)
         {
-            return await imagesRepository.DownloadAsync(name).ConfigureAwait(false);
+            var bytes = await imagesRepository.DownloadAsync(id).ConfigureAwait(false);
+            if (bytes == null)
+                return NotFound();
+            return File(bytes, MediaTypeNames.Application.Octet);
         }
 
-        [HttpPut("{*name}")]
-        public async Task UploadAsync(string name, [FromBody] byte[] image)
+        [HttpPut]
+        public async Task<ActionResult> UploadAsync()
         {
-            await imagesRepository.UploadAsync(name, image).ConfigureAwait(false);
+            using (var memoryStream = new MemoryStream())
+            {
+                await Request.Body.CopyToAsync(memoryStream).ConfigureAwait(false);
+                return Content(await imagesRepository.UploadAsync(memoryStream.ToArray()).ConfigureAwait(false));
+            }
         }
 
-        [HttpGet("Search/{*name}")]
-        public async Task<string[]> SearchAsync(string name)
+        [HttpDelete("{*id}")]
+        public async Task<ActionResult> DeleteAsync(string id)
         {
-            return await imagesRepository.SearchByName(name).ConfigureAwait(false);
-        }
-
-        [HttpDelete("{*name}")]
-        public async Task DeleteAsync(string name)
-        {
-            await imagesRepository.RemoveAsync(name).ConfigureAwait(false);
+            if (await imagesRepository.RemoveAsync(id).ConfigureAwait(false))
+                return Ok();
+            return NotFound();
         }
     }
 }

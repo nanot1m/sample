@@ -1,9 +1,10 @@
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Vostok.Instrumentation.AspNetCore;
 using Vostok.Sample.ImageStore.Controllers;
+using Vostok.Sample.ImageStore.Services;
 
 namespace Vostok.Sample.ImageStore
 {
@@ -31,6 +32,7 @@ namespace Vostok.Sample.ImageStore
                 })
                 .ConfigureServices((hostingContext, services) =>
                 {
+                    // todo (spaceorc 17.10.2017) сконфигурировать использование настоящего SQL-репозитория
                     services.AddSingleton<IImagesRepository>(new InMemoryImagesRepository());
                 })
                 .Build()

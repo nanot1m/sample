@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SixLabors.ImageSharp;
@@ -73,7 +74,9 @@ namespace Vostok.Sample.ImageFilter.Controllers
             using (var image = Image.Load(source))
             {
                 image.Mutate(filter);
-                var resultId = await imageStoreClient.UploadAsync(image.SavePixelData()).ConfigureAwait(false);
+                var outputStream = new MemoryStream();
+                image.SaveAsJpeg(outputStream);
+                var resultId = await imageStoreClient.UploadAsync(outputStream.ToArray()).ConfigureAwait(false);
                 return Ok(resultId);
             }
         }

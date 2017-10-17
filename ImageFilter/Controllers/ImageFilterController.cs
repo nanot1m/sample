@@ -1,66 +1,80 @@
 using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SixLabors.ImageSharp;
+using Vostok.Sample.ImageStore.Client;
 
 namespace Vostok.Sample.ImageFilter.Controllers
 {
     [Route("ImageFilter")]
     public class ImageFilterController : Controller
     {
-        [HttpPost("BlackWhite")]
-        public byte[] ApplyBlackWhite([FromBody] byte[] source)
+        private readonly ImageStoreClient imageStoreClient;
+
+        public ImageFilterController(ImageStoreClient imageStoreClient)
         {
-            return ApplyFilter(source, x => x.BlackWhite());
+            this.imageStoreClient = imageStoreClient;
         }
 
-        [HttpPost("Contrast/{*amount}")]
-        public byte[] ApplyContrast(int amount, [FromBody] byte[] source)
+        [HttpPost("{id}/BlackWhite")]
+        public async Task<ActionResult> ApplyBlackWhite(string id)
         {
-            return ApplyFilter(source, x => x.Contrast(amount));
+            return await ApplyFilter(id, x => x.BlackWhite()).ConfigureAwait(false);
         }
 
-        [HttpPost("Invert")]
-        public byte[] ApplyInvert([FromBody] byte[] source)
+        [HttpPost("{id}/Contrast/{*amount}")]
+        public async Task<ActionResult> ApplyContrast(int amount, string id)
         {
-            return ApplyFilter(source, x => x.Invert());
+            return await ApplyFilter(id, x => x.Contrast(amount)).ConfigureAwait(false);
         }
 
-        [HttpPost("Brightness/{*amount}")]
-        public byte[] ApplyBrightness(int amount, [FromBody] byte[] source)
+        [HttpPost("{id}/Invert")]
+        public async Task<ActionResult> ApplyInvert(string id)
         {
-            return ApplyFilter(source, x => x.Brightness(amount));
+            return await ApplyFilter(id, x => x.Invert()).ConfigureAwait(false);
         }
 
-        [HttpPost("Pixelate/{*size}")]
-        public byte[] ApplyPixelate(int size, [FromBody] byte[] source)
+        [HttpPost("{id}/Brightness/{*amount}")]
+        public async Task<ActionResult> ApplyBrightness(int amount, string id)
         {
-            return ApplyFilter(source, x => x.Pixelate(size));
+            return await ApplyFilter(id, x => x.Brightness(amount)).ConfigureAwait(false);
         }
 
-        [HttpPost("OilPaint")]
-        public byte[] ApplyOilPaint([FromBody] byte[] source)
+        [HttpPost("{id}/Pixelate/{*size}")]
+        public async Task<ActionResult> ApplyPixelate(int size, string id)
         {
-            return ApplyFilter(source, x => x.OilPaint());
+            return await ApplyFilter(id, x => x.Pixelate(size)).ConfigureAwait(false);
         }
 
-        [HttpPost("Vignette")]
-        public byte[] ApplyVignette([FromBody] byte[] source)
+        [HttpPost("{id}/OilPaint")]
+        public async Task<ActionResult> ApplyOilPaint(string id)
         {
-            return ApplyFilter(source, x => x.Vignette());
+            return await ApplyFilter(id, x => x.OilPaint()).ConfigureAwait(false);
         }
 
-        [HttpPost("Glow")]
-        public byte[] ApplyGlow([FromBody] byte[] source)
+        [HttpPost("{id}/Vignette")]
+        public async Task<ActionResult> ApplyVignette(string id)
         {
-            return ApplyFilter(source, x => x.Glow());
+            return await ApplyFilter(id, x => x.Vignette()).ConfigureAwait(false);
         }
 
-        private static byte[] ApplyFilter(byte[] source, Action<IImageProcessingContext<Rgba32>> filter)
+        [HttpPost("{id}/Glow")]
+        public async Task<ActionResult> ApplyGlow(string id)
         {
+            return await ApplyFilter(id, x => x.Glow()).ConfigureAwait(false);
+        }
+
+        private async Task<ActionResult> ApplyFilter(string sourceId, Action<IImageProcessingContext<Rgba32>> filter)
+        {
+            var source = await imageStoreClient.DownloadAsync(sourceId).ConfigureAwait(false);
+            if (source == null)
+                return NotFound();
+
             using (var image = Image.Load(source))
             {
                 image.Mutate(filter);
-                return image.SavePixelData();
+                var resultId = await imageStoreClient.UploadAsync(image.SavePixelData()).ConfigureAwait(false);
+                return Ok(resultId);
             }
         }
     }

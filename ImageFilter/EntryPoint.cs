@@ -1,8 +1,11 @@
+using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Vostok.Instrumentation.AspNetCore;
+using Vostok.Logging;
+using Vostok.Sample.ImageStore.Client;
 
 namespace Vostok.Sample.ImageFilter
 {
@@ -27,6 +30,11 @@ namespace Vostok.Sample.ImageFilter
                     app.UseVostok();
                     app.UseDeveloperExceptionPage();
                     app.UseMvc();
+                })
+                .ConfigureServices((hostingContext, services) =>
+                {
+                    var host = hostingContext.Configuration.GetSection("topology").GetValue<Uri>("imageStore");
+                    services.AddSingleton(provider => new ImageStoreClient(provider.GetService<ILog>(), host));
                 })
                 .Build()
                 .Run();

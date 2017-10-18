@@ -20,7 +20,7 @@ namespace Vostok.Sample.ImageFilter.Controllers
         [HttpPost("{id}/BlackWhite")]
         public async Task<ActionResult> ApplyBlackWhite(string id)
         {
-            return await ApplyFilter(id, x => x.BlackWhite()).ConfigureAwait(false);
+            return await ApplyFilterAsync(id, x => x.BlackWhite()).ConfigureAwait(false);
         }
 
         [HttpPost("{id}/Contrast/{*amount}")]
@@ -28,13 +28,13 @@ namespace Vostok.Sample.ImageFilter.Controllers
         {
             if (amount < -100 || amount > 100)
                 return BadRequest("Contrast amount must be between -100 and 100.");
-            return await ApplyFilter(id, x => x.Contrast(amount)).ConfigureAwait(false);
+            return await ApplyFilterAsync(id, x => x.Contrast(amount)).ConfigureAwait(false);
         }
 
         [HttpPost("{id}/Invert")]
         public async Task<ActionResult> ApplyInvert(string id)
         {
-            return await ApplyFilter(id, x => x.Invert()).ConfigureAwait(false);
+            return await ApplyFilterAsync(id, x => x.Invert()).ConfigureAwait(false);
         }
 
         [HttpPost("{id}/Brightness/{*amount}")]
@@ -42,7 +42,7 @@ namespace Vostok.Sample.ImageFilter.Controllers
         {
             if (amount < -100 || amount > 100)
                 return BadRequest("Brightness amount must be between -100 and 100.");
-            return await ApplyFilter(id, x => x.Brightness(amount)).ConfigureAwait(false);
+            return await ApplyFilterAsync(id, x => x.Brightness(amount)).ConfigureAwait(false);
         }
 
         [HttpPost("{id}/Pixelate/{*size}")]
@@ -50,25 +50,25 @@ namespace Vostok.Sample.ImageFilter.Controllers
         {
             if (size <= 0)
                 return BadRequest("Pixel size must be greater than zero.");
-            return await ApplyFilter(id, x => x.Pixelate(size)).ConfigureAwait(false);
+            return await ApplyFilterAsync(id, x => x.Pixelate(size)).ConfigureAwait(false);
         }
 
         [HttpPost("{id}/OilPaint")]
         public async Task<ActionResult> ApplyOilPaint(string id)
         {
-            return await ApplyFilter(id, x => x.OilPaint()).ConfigureAwait(false);
+            return await ApplyFilterAsync(id, x => x.OilPaint()).ConfigureAwait(false);
         }
 
         [HttpPost("{id}/Vignette")]
         public async Task<ActionResult> ApplyVignette(string id)
         {
-            return await ApplyFilter(id, x => x.Vignette()).ConfigureAwait(false);
+            return await ApplyFilterAsync(id, x => x.Vignette()).ConfigureAwait(false);
         }
 
         [HttpPost("{id}/Glow")]
         public async Task<ActionResult> ApplyGlow(string id)
         {
-            return await ApplyFilter(id, x => x.Glow()).ConfigureAwait(false);
+            return await ApplyFilterAsync(id, x => x.Glow()).ConfigureAwait(false);
         }
 
         [HttpPost("{id}/Resize/{width}x{height}")]
@@ -76,10 +76,10 @@ namespace Vostok.Sample.ImageFilter.Controllers
         {
             if (width < 0 || height < 0 || width + height == 0)
                 return BadRequest("Width and height must be greater than zero. One of them can be zero (to preserve aspect ratio), but not both.");
-            return await ApplyFilter(id, x => x.Resize(width, height)).ConfigureAwait(false);
+            return await ApplyFilterAsync(id, x => x.Resize(width, height)).ConfigureAwait(false);
         }
         
-        private async Task<ActionResult> ApplyFilter(string sourceId, Action<IImageProcessingContext<Rgba32>> filter)
+        private async Task<ActionResult> ApplyFilterAsync(string sourceId, Action<IImageProcessingContext<Rgba32>> filter)
         {
             var source = await imageStoreClient.DownloadAsync(sourceId).ConfigureAwait(false);
             if (source == null)

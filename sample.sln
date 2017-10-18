@@ -10,6 +10,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VotingService", "VotingServ
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageFilter", "ImageFilter\ImageFilter.csproj", "{3FFF35FA-6BBD-4E65-B3BA-1903E682B0C4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageFilter.Client", "ImageFilter.Client\ImageFilter.Client.csproj", "{1FB50E96-1264-4AA2-A0C1-ED88E9453C5E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{3FFF35FA-6BBD-4E65-B3BA-1903E682B0C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3FFF35FA-6BBD-4E65-B3BA-1903E682B0C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3FFF35FA-6BBD-4E65-B3BA-1903E682B0C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FB50E96-1264-4AA2-A0C1-ED88E9453C5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FB50E96-1264-4AA2-A0C1-ED88E9453C5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FB50E96-1264-4AA2-A0C1-ED88E9453C5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FB50E96-1264-4AA2-A0C1-ED88E9453C5E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

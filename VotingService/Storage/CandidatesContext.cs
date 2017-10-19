@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace Vostok.Sample.VotingService.Controllers
+namespace Vostok.Sample.VotingService.Storage
 {
     public class CandidatesContext : DbContext
     {
         public CandidatesContext(DbContextOptions<CandidatesContext> options)
-            : base(options)
+            : base((DbContextOptions) options)
         {
         }
 

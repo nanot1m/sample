@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Vostok.Instrumentation.AspNetCore;
-using Vostok.Sample.ImageStore.Controllers;
 using Vostok.Sample.ImageStore.Services;
 
 namespace Vostok.Sample.ImageStore

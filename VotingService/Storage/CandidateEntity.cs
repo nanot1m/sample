@@ -1,11 +1,19 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Vostok.Sample.VotingService.Controllers
+namespace Vostok.Sample.VotingService.Storage
 {
     public class CandidateEntity
     {
         [Key]
-        public string Name { get; set; }
+        public string UserId { get; set; }
+
+        [Key]
+        public string GroupId { get; set; }
+
+        [Key]
+        public string ImageId { get; set; }
+
+        public string ThumbId { get; set; }
 
         public int ParticipationsCount { get; set; }
 

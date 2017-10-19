@@ -1,6 +1,7 @@
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Vostok.Sample.VotingService.Models;
+using Vostok.Sample.VotingService.Storage;
 
 namespace Vostok.Sample.VotingService.Controllers
 {
@@ -14,23 +15,31 @@ namespace Vostok.Sample.VotingService.Controllers
             this.repository = repository;
         }
 
-        [HttpPut("{*name}")]
-        public async Task AddAsync(string name)
+        [HttpPut]
+        public async Task AddAsync(Candidate candidate)
         {
-            await repository.AddAsync(name).ConfigureAwait(false);
+            await repository.AddAsync(
+                    new CandidateEntity
+                    {
+                        UserId = candidate.UserId,
+                        GroupId = candidate.GroupId,
+                        ImageId = candidate.ImageId,
+                        ThumbId = candidate.ThumbId
+                    })
+                .ConfigureAwait(false);
         }
 
-        [HttpDelete("{*name}")]
-        public async Task DeleteAsync(string name)
+        [HttpDelete]
+        public async Task DeleteAsync(CandidateKey candidateKey)
         {
-            await repository.RemoveAsync(name).ConfigureAwait(false);
-        }
-
-        [HttpGet("{*count}")]
-        public async Task<string[]> SelectRandomAsync(int count)
-        {
-            var candidates = await repository.SelectRandomAsync(count).ConfigureAwait(false);
-            return candidates.Select(x => x.Name).ToArray();
+            await repository.RemoveAsync(
+                    new CandidateEntity
+                    {
+                        UserId = candidateKey.UserId,
+                        GroupId = candidateKey.GroupId,
+                        ImageId = candidateKey.ImageId
+                    })
+                .ConfigureAwait(false);
         }
     }
 }

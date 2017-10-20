@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Vostok.Sample.VotingService.Models;
 using Vostok.Sample.VotingService.Storage;
@@ -9,9 +8,9 @@ namespace Vostok.Sample.VotingService.Controllers
     [Route("Ballot")]
     public class BallotController : Controller
     {
-        private readonly CandidatesRepository repository;
+        private readonly ICandidatesRepository repository;
 
-        public BallotController(CandidatesRepository repository)
+        public BallotController(ICandidatesRepository repository)
         {
             this.repository = repository;
         }
@@ -19,24 +18,15 @@ namespace Vostok.Sample.VotingService.Controllers
         [HttpGet]
         public async Task<ActionResult> GetAsync(UserKey userKey, int count = 2)
         {
-            var entities = await repository.SelectRandomAsync(userKey.UserId, userKey.GroupId, count).ConfigureAwait(false);
-            return Json(
-                entities.Select(
-                        e => new Candidate
-                        {
-                            UserId = e.UserId,
-                            GroupId = e.GroupId,
-                            ImageId = e.ImageId,
-                            ThumbId = e.ThumbId
-                        })
-                    .ToArray());
+            var candidates = await repository.SelectRandomAsync(userKey, count).ConfigureAwait(false);
+            return Json(candidates);
         }
 
         [HttpPost]
-        public async Task AddAsync([FromBody] Ballot ballot)
+        public async Task VoteAsync([FromBody] Ballot ballot)
         {
             foreach (var candidate in ballot.Candidates)
-                await repository.UpdateAsync(candidate.UserId, candidate.GroupId, candidate.ImageId, candidate.Vote).ConfigureAwait(false);
+                await repository.VoteAsync(candidate, candidate.Vote).ConfigureAwait(false);
         }
     }
 }

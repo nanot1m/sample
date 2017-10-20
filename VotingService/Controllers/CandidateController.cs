@@ -8,9 +8,9 @@ namespace Vostok.Sample.VotingService.Controllers
     [Route("Candidate")]
     public class CandidateController : Controller
     {
-        private readonly CandidatesRepository repository;
+        private readonly ICandidatesRepository repository;
 
-        public CandidateController(CandidatesRepository repository)
+        public CandidateController(ICandidatesRepository repository)
         {
             this.repository = repository;
         }
@@ -18,28 +18,13 @@ namespace Vostok.Sample.VotingService.Controllers
         [HttpPut]
         public async Task AddAsync(Candidate candidate)
         {
-            await repository.AddAsync(
-                    new CandidateEntity
-                    {
-                        UserId = candidate.UserId,
-                        GroupId = candidate.GroupId,
-                        ImageId = candidate.ImageId,
-                        ThumbId = candidate.ThumbId
-                    })
-                .ConfigureAwait(false);
+            await repository.AddAsync(candidate).ConfigureAwait(false);
         }
 
         [HttpDelete]
         public async Task DeleteAsync(CandidateKey candidateKey)
         {
-            await repository.RemoveAsync(
-                    new CandidateEntity
-                    {
-                        UserId = candidateKey.UserId,
-                        GroupId = candidateKey.GroupId,
-                        ImageId = candidateKey.ImageId
-                    })
-                .ConfigureAwait(false);
+            await repository.RemoveAsync(candidateKey).ConfigureAwait(false);
         }
     }
 }

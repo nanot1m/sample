@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Vostok.Instrumentation.AspNetCore;
+using Vostok.Sample.VotingService.Storage;
 
 namespace Vostok.Sample.VotingService
 {
@@ -27,6 +28,11 @@ namespace Vostok.Sample.VotingService
                     app.UseVostok();
                     app.UseDeveloperExceptionPage();
                     app.UseMvc();
+                })
+                .ConfigureServices((hostingContext, services) =>
+                {
+                    // todo (spaceorc 17.10.2017) сконфигурировать использование настоящего SQL-репозитория
+                    services.AddSingleton<ICandidatesRepository>(new InMemoryCandidatesRepository());
                 })
                 .Build()
                 .Run();

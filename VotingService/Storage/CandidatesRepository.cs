@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Vostok.Sample.VotingService.Models;
+using Vostok.Sample.VotingService.Client.Models;
 
 namespace Vostok.Sample.VotingService.Storage
 {

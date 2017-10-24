@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Vostok.Sample.VotingService.Client</RootNamespace>
+    <AssemblyName>Vostok.Sample.VotingService.Client</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+    <PackageReference Include="Vostok.ClusterClient" Version="1.0.0-pre000255" />
+    <PackageReference Include="Vostok.ClusterClient.Transport.Http" Version="1.0.0-pre000255" />
+    <PackageReference Include="Vostok.Core" Version="1.0.0-pre000255" />
+  </ItemGroup>
+
+</Project>

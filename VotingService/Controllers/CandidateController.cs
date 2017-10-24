@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Vostok.Sample.VotingService.Models;
+using Vostok.Sample.VotingService.Client.Models;
 using Vostok.Sample.VotingService.Storage;
 
 namespace Vostok.Sample.VotingService.Controllers

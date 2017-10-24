@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Vostok.Sample.VotingService.Models;
+using Vostok.Sample.VotingService.Client.Models;
 
 namespace Vostok.Sample.VotingService.Storage
 {

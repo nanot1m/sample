@@ -56,9 +56,9 @@ namespace Vostok.Sample.VotingService.Client
             result.Response.EnsureSuccessStatusCode();
         }
 
-        public async Task<LeaderCandidate[]> GetLeaderCandidatesAsync(int count = 10)
+        public async Task<LeaderCandidate[]> GetLeaderCandidatesAsync(string gouprId, int count = 10)
         {
-            var request = Request.Get($"Leaderboard?count={count}");
+            var request = Request.Get($"Leaderboard?gouprId={gouprId}&count={count}");
             var result = await cluster.SendAsync(request).ConfigureAwait(false);
             result.Response.EnsureSuccessStatusCode();
             return Deserialize<LeaderCandidate[]>(result.Response.Content.ToString());

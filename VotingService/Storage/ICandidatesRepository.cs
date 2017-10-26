@@ -8,7 +8,7 @@ namespace Vostok.Sample.VotingService.Storage
         Task AddAsync(Candidate candidate);
         Task RemoveAsync(CandidateKey candidateKey);
         Task<Candidate[]> SelectRandomAsync(UserKey askingUserKey, int count);
-        Task<LeaderCandidate[]> GetLeadersAsync(int count);
+        Task<LeaderCandidate[]> GetLeadersAsync(string groupId, int count);
         Task VoteAsync(CandidateKey candidateKey, bool vote);
     }
 }

@@ -43,9 +43,9 @@ namespace Vostok.Sample.VotingService.Storage
 
         }
 
-        public async Task<LeaderCandidate[]> GetLeadersAsync(int count)
+        public async Task<LeaderCandidate[]> GetLeadersAsync(string groupId, int count)
         {
-            return candidates.Values.OrderByDescending(x => x.Ratio).Take(count).Select(x => x.Clone()).ToArray();
+            return candidates.Values.Where(x => x.GroupId == groupId).OrderByDescending(x => x.Ratio).Take(count).Select(x => x.Clone()).ToArray();
         }
 
         public async Task VoteAsync(CandidateKey candidateKey, bool vote)

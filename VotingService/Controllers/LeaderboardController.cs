@@ -15,9 +15,9 @@ namespace Vostok.Sample.VotingService.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetAsync(int count = 10)
+        public async Task<ActionResult> GetAsync(string groupId, int count = 10)
         {
-            var leaders = await repository.GetLeadersAsync(count).ConfigureAwait(false);
+            var leaders = await repository.GetLeadersAsync(groupId, count).ConfigureAwait(false);
             return Json(leaders);
         }
     }

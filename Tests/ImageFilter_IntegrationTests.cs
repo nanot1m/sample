@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using FluentAssertions;
 using NUnit.Framework;
 using Vostok.Logging;
 using Vostok.Logging.Logs;

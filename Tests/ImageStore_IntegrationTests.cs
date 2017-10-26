@@ -3,6 +3,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
 using NUnit.Framework;
+using Vostok.Logging;
 using Vostok.Logging.Logs;
 using Vostok.Sample.ImageStore.Client;
 
@@ -10,12 +11,14 @@ namespace Tests
 {
     public class ImageStore_IntegrationTests
     {
+        private ILog log;
         private ImageStoreClient imageStoreClient;
 
         [SetUp]
         public void SetUp()
         {
-            imageStoreClient = new ImageStoreClient(new ConsoleLog(), new Uri("http://localhost:33334"));
+            log = new ConsoleLog();
+            imageStoreClient = new ImageStoreClient(log, new Uri("http://localhost:33334"));
         }
 
         [Test]

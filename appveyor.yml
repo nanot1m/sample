@@ -57,3 +57,13 @@ after_build:
           }
         }
       }
+test_script:
+  - ps: |
+      Start-Process dotnet -ArgumentList "run --project=.\ImageFilter\ --no-build --no-restore"
+      Start-Process dotnet -ArgumentList "run --project=.\ImageStore\ --no-build --no-restore"
+      Start-Process dotnet -ArgumentList "run --project=.\VotingService\ --no-build --no-restore"
+      dotnet test "$env:appveyor_build_folder\Tests\Tests.csproj" --logger "trx;LogFileName=sample-tests.trx"
+after_test:
+  - ps: |
+      $wc = New-Object 'System.Net.WebClient'
+      $wc.UploadFile("https://ci.appveyor.com/api/testresults/mstest/$($env:appveyor_job_id)", "$env:appveyor_build_folder\Tests\TestResults\sample-tests.trx")

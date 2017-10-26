@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Vostok.Sample.VotingService.Controllers
@@ -7,7 +6,7 @@ namespace Vostok.Sample.VotingService.Controllers
     public class HomeController : Controller
     {
         [HttpGet]
-        public async Task<object> Index()
+        public string Index()
         {
             return "VotingService";
         }

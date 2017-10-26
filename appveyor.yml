@@ -50,7 +50,7 @@ after_build:
         foreach($csproj in $csprojs)
         {
           $name = $csproj.BaseName
-          $nupkgs = Get-ChildItem $env:appveyor_build_folder\$name\bin\Release\$name.*.nupkg
+          $nupkgs = Get-ChildItem $env:appveyor_build_folder\$name\bin\Release\Vostok.Sample.$name.*.nupkg
           if ($nupkgs)
           {
             $nupkgs | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }

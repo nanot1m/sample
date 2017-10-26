@@ -59,6 +59,7 @@ after_build:
       }
 test_script:
   - ps: |
+      $ErrorActionPreference = "SilentlyContinue"
       Start-Process dotnet -ArgumentList "run --project=.\ImageFilter\ --no-build --no-restore"
       Start-Process dotnet -ArgumentList "run --project=.\ImageStore\ --no-build --no-restore"
       Start-Process dotnet -ArgumentList "run --project=.\VotingService\ --no-build --no-restore"

@@ -4,8 +4,8 @@ namespace Vostok.Sample.VotingService.Storage
 {
     public class CandidatesContext : DbContext
     {
-        public CandidatesContext(DbContextOptions<CandidatesContext> options)
-            : base((DbContextOptions) options)
+        public CandidatesContext(string connectionString)
+            : base(new DbContextOptionsBuilder().UseSqlServer(connectionString).Options)
         {
         }
 

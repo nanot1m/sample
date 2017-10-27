@@ -28,7 +28,8 @@ namespace Vostok.Sample.ImageFilter
                 .Configure(app =>
                 {
                     app.UseVostok();
-                    app.UseDeveloperExceptionPage();
+                    if (app.ApplicationServices.GetRequiredService<IHostingEnvironment>().IsDevelopment())
+                        app.UseDeveloperExceptionPage();
                     app.UseMvc();
                 })
                 .ConfigureServices((hostingContext, services) =>

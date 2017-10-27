@@ -26,13 +26,17 @@ namespace Vostok.Sample.ImageStore
                 .Configure(app =>
                 {
                     app.UseVostok();
-                    app.UseDeveloperExceptionPage();
+                    if (app.ApplicationServices.GetRequiredService<IHostingEnvironment>().IsDevelopment())
+                        app.UseDeveloperExceptionPage();
                     app.UseMvc();
                 })
                 .ConfigureServices((hostingContext, services) =>
                 {
-                    // todo (spaceorc 17.10.2017) сконфигурировать использование настоящего SQL-репозитория
-                    services.AddSingleton<IImagesRepository>(new InMemoryImagesRepository());
+                    var connectionString = hostingContext.Configuration.GetConnectionString("ImagesDatabase");
+                    if (string.IsNullOrEmpty(connectionString))
+                        services.AddSingleton<IImagesRepository>(new InMemoryImagesRepository());
+                    else
+                        services.AddSingleton<IImagesRepository>(new ImagesRepository(new ImagesContext(connectionString)));
                 })
                 .Build()
                 .Run();

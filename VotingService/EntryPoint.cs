@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Vostok.Instrumentation.AspNetCore;
@@ -26,13 +27,17 @@ namespace Vostok.Sample.VotingService
                 .Configure(app =>
                 {
                     app.UseVostok();
-                    app.UseDeveloperExceptionPage();
+                    if (app.ApplicationServices.GetRequiredService<IHostingEnvironment>().IsDevelopment())
+                        app.UseDeveloperExceptionPage();
                     app.UseMvc();
                 })
                 .ConfigureServices((hostingContext, services) =>
                 {
-                    // todo (spaceorc 17.10.2017) сконфигурировать использование настоящего SQL-репозитория
-                    services.AddSingleton<ICandidatesRepository>(new InMemoryCandidatesRepository());
+                    var connectionString = hostingContext.Configuration.GetConnectionString("CandidatesDatabase");
+                    if (string.IsNullOrEmpty(connectionString))
+                        services.AddSingleton<ICandidatesRepository>(new InMemoryCandidatesRepository());
+                    else
+                        services.AddSingleton<ICandidatesRepository>(new CandidatesRepository(new CandidatesContext(connectionString)));
                 })
                 .Build()
                 .Run();

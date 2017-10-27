@@ -4,8 +4,8 @@ namespace Vostok.Sample.ImageStore.Services
 {
     public class ImagesContext : DbContext
     {
-        public ImagesContext(DbContextOptions<ImagesContext> options)
-            : base(options)
+        public ImagesContext(string connectionString)
+            : base(new DbContextOptionsBuilder().UseSqlServer(connectionString).Options)
         {
         }
 

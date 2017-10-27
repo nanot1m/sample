@@ -49,9 +49,11 @@ namespace Vostok.Sample.VotingService.Client
             return Deserialize<Candidate[]>(result.Response.Content.ToString());
         }
 
-        public async Task VoteAsync(Ballot ballot)
+        public async Task VoteAsync(params BallotCandidate[] candidates)
         {
-            var request = Request.Post("Ballot").WithContent(Serialize(ballot));
+            var request = Request.Post("Ballot")
+                .WithContentTypeHeader("application/json")
+                .WithContent(Serialize(new Ballot{Candidates = candidates}));
             var result = await cluster.SendAsync(request).ConfigureAwait(false);
             result.Response.EnsureSuccessStatusCode();
         }
